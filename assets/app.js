@@ -12,7 +12,7 @@ var endYear		 = 0;
 //URL base
 var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" + apiKey;
 
-//article counter (need for for-loops)
+//article counter 
 var articleCounter = 0;
 
 //FUNCTIONS
@@ -25,13 +25,14 @@ function runQuery(numArticles, queryURL) {
 		url: queryURL, 
 		method: "GET"
 	}).then(function(NYTData) {
-			$("#wellSection").empty();
+			// $("#well-section").empty();
 
 			for(var i = 0; i < numArticles; i++) {
+				articleCounter++;
 				//dump to HTML
 				var wellSection = $("<div>");
 				wellSection.addClass("well");
-				wellSection.attr('id', 'article-well-' + i);
+				wellSection.attr('id', 'article-well-' + articleCounter);
 				$("#well-section").append(wellSection);
 
 				//store shorthand to search results
@@ -39,22 +40,21 @@ function runQuery(numArticles, queryURL) {
 				
 				//if it exists 
 				if(searchResults.headline !=="null") {
-					$("#article-well-" + i).append("<h3>" + searchResults.headline.main + "</h3>");
+					$("#article-well-" + articleCounter).append("<h3>" + searchResults.headline.main + "</h3>");
 				}
 
 				if(searchResults.byline && searchResults.byline.original) {
-					$("#article-well-" + i).append("<h5>" + searchResults.byline.original + "</h5>");	
+					$("#article-well-" + articleCounter).append("<h5>" + searchResults.byline.original + "</h5>");	
+				}
+
+				if(searchResults.section_name) {
+					$("#article-well-" + articleCounter).append("<h5>" + searchResults.section_name + "</h5>");
 				}
 
 				//append to new div wellSection
-				$("#article-well-" + i).append("<h5>" + searchResults.section_name + "</h5>");
-				$("#article-well-" + i).append("<h5>" + searchResults.pub_date + "</h5>");
-				$("#article-well-" + i).append("<a href='" + searchResults.web_url + "' target='_blank'>" + searchResults.web_url + "</a>");
 				
-
-				console.log(searchResults.web_url);
-
-
+				$("#article-well-" + articleCounter).append("<h5>" + searchResults.pub_date + "</h5>");
+				$("#article-well-" + articleCounter).append("<a href='" + searchResults.web_url + "' target='_blank'>" + searchResults.web_url + "</a>");
 			}
 	})
 };
@@ -63,6 +63,10 @@ function runQuery(numArticles, queryURL) {
 //==============================================
 $("#search-btn").click( function(event) {
 	event.preventDefault();
+
+	articleCounter = 0;
+
+	$('#well-section').empty();
 
 	//get searched value
 	queryTerm = $("#search").val().trim();
@@ -88,16 +92,14 @@ $("#search-btn").click( function(event) {
 	if(parseInt(endYear)) {
 		endYear = endYear + "0101";
 		// add the date info to the url
-		newURL = newURL + "&begin_date=" + endYear;
+		newURL = newURL + "&end_date=" + endYear;
 	}
 		runQuery(numResults, newURL);
 });
 
 //clear button
 $('#clear-btn').click(function() {
-	$("#wellSection").empty();
-	var queryTerm	 = "";
-	var numResults	 = 0;
-	var startYear	 = 0;
-	var endYear		 = 0;
-})
+	articleCounter = 0;
+	$('#well-section').empty();
+
+});
