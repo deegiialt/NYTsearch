@@ -28,43 +28,34 @@ function runQuery(numArticles, queryURL) {
 			$("#wellSection").empty();
 
 			for(var i = 0; i < numArticles; i++) {
+				//dump to HTML
+				var wellSection = $("<div>");
+				wellSection.addClass("well");
+				wellSection.attr('id', 'article-well-' + i);
+				$("#well-section").append(wellSection);
+
+				//store shorthand to search results
 				var searchResults = NYTData.response.docs[i];
 				
 				//if it exists 
 				if(searchResults.headline !=="null") {
-					console.log(searchResults.headline.main);
 					$("#article-well-" + i).append("<h3>" + searchResults.headline.main + "</h3>");
 				}
 
 				if(searchResults.byline && searchResults.byline.original) {
-					console.log(searchResults.byline.original);
 					$("#article-well-" + i).append("<h5>" + searchResults.byline.original + "</h5>");	
 				}
 
+				//append to new div wellSection
 				$("#article-well-" + i).append("<h5>" + searchResults.section_name + "</h5>");
 				$("#article-well-" + i).append("<h5>" + searchResults.pub_date + "</h5>");
-				$("#article-well-" + i).append("<h5>" + searchResults.web_url + "</h5>");
+				$("#article-well-" + i).append("<a href='" + searchResults.web_url + "' target='_blank'>" + searchResults.web_url + "</a>");
 				
-				//debugging
 
-				console.log(searchResults.section_name);
-				console.log(searchResults.pub_date);
 				console.log(searchResults.web_url);
 
-				//dump to HTML
-				var wellSection = $("<div>");
-				wellSection.addClass("well");
-				wellSection.attr('id', 'articleWell-', + i);
-				$("#wellSection").append(wellSection);
 
-				//attach to wells
-				$("#articleWell-" + i).append();
 			}
-
-		//logging to console
-		console.log(queryURL);
-		console.log(numArticles);
-		console.log(NYTData);
 	})
 };
 
