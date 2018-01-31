@@ -33,17 +33,17 @@ function runQuery(numArticles, queryURL) {
 				//if it exists 
 				if(searchResults.headline !=="null") {
 					console.log(searchResults.headline.main);
-					$("#article-well-" + i).append("<h3>"searchResults.headline.main "</h3>");
+					$("#article-well-" + i).append("<h3>" + searchResults.headline.main + "</h3>");
 				}
 
-				if(searchResults.byline.original && searchResults.byline) {
+				if(searchResults.byline && searchResults.byline.original) {
 					console.log(searchResults.byline.original);
-					$("#article-well-" + i).append("<h5>"searchResults.byline.original "</h5>");	
+					$("#article-well-" + i).append("<h5>" + searchResults.byline.original + "</h5>");	
 				}
 
-				$("#article-well-" + i).append("<h5>"searchResults.section_name "</h5>");
-				$("#article-well-" + i).append("<h5>"searchResults.pub_date "</h5>");
-				$("#article-well-" + i).append("<h5>"searchResults.web_url "</h5>");
+				$("#article-well-" + i).append("<h5>" + searchResults.section_name + "</h5>");
+				$("#article-well-" + i).append("<h5>" + searchResults.pub_date + "</h5>");
+				$("#article-well-" + i).append("<h5>" + searchResults.web_url + "</h5>");
 				
 				//debugging
 
@@ -66,7 +66,7 @@ function runQuery(numArticles, queryURL) {
 		console.log(numArticles);
 		console.log(NYTData);
 	})
-}
+};
 
 //MAIN PROCESS
 //==============================================
@@ -104,6 +104,7 @@ $("#search-btn").click( function(event) {
 
 //clear button
 $('#clear-btn').click(function() {
+	$("#wellSection").empty();
 	var queryTerm	 = "";
 	var numResults	 = 0;
 	var startYear	 = 0;
