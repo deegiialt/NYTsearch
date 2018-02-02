@@ -1,0 +1,10 @@
+body {
+	font-family: Roboto, sans-serif;
+}
+
+.jumbotron {
+	margin-top: 10px;
+	background-image: url("http://www.travante.com/wp-content/uploads/New-York-Banner.jpg");
+	background-size: cover;
+	color: white;
+}
