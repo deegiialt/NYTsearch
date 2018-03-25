@@ -7,7 +7,7 @@ var apiKey = "17d2cfedf41d4f29a356ed5d008336c9";
 var queryTerm	 = "";
 var numResults	 = 0;
 var startYear	 = 0;
-var endYear		 = 0;
+var endYear	 = 0;
 
 //URL base
 var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" + apiKey;
@@ -19,14 +19,11 @@ var articleCounter = 0;
 //==============================================
 
 function runQuery(numArticles, queryURL) {
-
 	//AJAX function
 	$.ajax({
 		url: queryURL, 
 		method: "GET"
 	}).then(function(NYTData) {
-			// $("#well-section").empty();
-
 			for(var i = 0; i < numArticles; i++) {
 				articleCounter++;
 				//dump to HTML
@@ -52,7 +49,6 @@ function runQuery(numArticles, queryURL) {
 				}
 
 				//append to new div wellSection
-				
 				$("#article-well-" + articleCounter).append("<h5>" + searchResults.pub_date + "</h5>");
 				$("#article-well-" + articleCounter).append("<a href='" + searchResults.web_url + "' target='_blank'>" + searchResults.web_url + "</a>");
 			}
@@ -101,5 +97,4 @@ $("#search-btn").click( function(event) {
 $('#clear-btn').click(function() {
 	articleCounter = 0;
 	$('#well-section').empty();
-
 });
