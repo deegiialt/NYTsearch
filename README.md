@@ -5,4 +5,4 @@
 https://deegiialt.github.io/NYTsearch/
 
 ## Technologies used:
-REST API's, Javascript, Bootstrap, jQuery
+REST API's, Javascript, Bootstrap, jQuery, AJAX
