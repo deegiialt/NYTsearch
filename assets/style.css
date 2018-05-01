@@ -4,7 +4,8 @@ body {
 
 .jumbotron {
 	margin-top: 20px;
-	background-image: url("http://www.travante.com/wp-content/uploads/New-York-Banner.jpg");
-	background-size: cover;
+	background-image: url("http://green-landscape.com/wp-content/uploads/2013/01/lovely-sunset-new-york-12.jpg");
+/* 	background-size: cover; */
+	
 	color: white;
 }
